@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import Donut from './Donut';
+import Donut, {DEFAULT_SIZE} from './Donut';
 import {Pressable, View} from 'react-native';
 
-const Part = ({index, total, size, data, state}) => {
+const Part = ({index, total, size = DEFAULT_SIZE, data, state}) => {
   const width = size / 2;
   const item = data[index];
   const percent = (item.value / total) * 100;
@@ -88,13 +88,15 @@ const Part = ({index, total, size, data, state}) => {
 };
 
 export default props => {
-  const {size = 200, data} = props;
+  const {size = DEFAULT_SIZE, data, thickness, children} = props;
   const state = useState();
+  const strokeWidth = thickness || size / 10;
   return (
     <Pressable
       style={{alignItems: 'center', justifyContent: 'center'}}
       onPress={() => state[1]()}>
-      <Donut {...props} />
+      <Donut {...props} strokeWidth={strokeWidth} />
+
       <View
         style={{
           position: 'absolute',
@@ -105,6 +107,19 @@ export default props => {
           <Part {...props} index={i} state={state} />
         ))}
       </View>
+      <View
+        style={{
+          width: size - strokeWidth * 2,
+          height: size - strokeWidth * 2,
+          borderRadius: size,
+          alignItems:'center',
+          justifyContent:'center',
+          // backgroundColor: 'red',
+          // opacity: .9,
+          position: 'absolute',
+        }}
+        children={children}
+      />
     </Pressable>
   );
 };

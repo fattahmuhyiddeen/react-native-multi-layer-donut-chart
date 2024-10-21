@@ -1,11 +1,12 @@
 import React from 'react';
 import Svg, {Circle} from 'react-native-svg';
+export const DEFAULT_SIZE = 200;
 
 export default ({
   total,
   data,
-  size = 250,
-  thickness,
+  size = DEFAULT_SIZE,
+  strokeWidth,
   baseColor = '#f1f1f1',
 }) => {
   let acc = 0;
@@ -16,7 +17,7 @@ export default ({
     r: radius,
     fill: 'none',
     stroke,
-    strokeWidth: thickness || size / 10,
+    strokeWidth,
     strokeDasharray: length,
     rotation: -90,
     originX: size / 2,
