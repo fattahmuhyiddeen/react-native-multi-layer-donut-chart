@@ -1,0 +1,29 @@
+{
+  "name": "react-native-multi-layer-donut-chart",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pub": "npm publish --access=public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fattahmuhyiddeen/react-native-multi-layer-donut-chart.git"
+  },
+  "keywords": [
+    "chart",
+    "donut",
+    "layer",
+    "multi"
+  ],
+  "author": "Fattah Muhyiddeen <fattahmuhyiddeen@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fattahmuhyiddeen/react-native-multi-layer-donut-chart/issues"
+  },
+  "homepage": "https://github.com/fattahmuhyiddeen/react-native-multi-layer-donut-chart#readme",
+  "dependencies": {
+    "react-native-svg": "15.8.0"
+  }
+}
