@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
+import Svg, {Path} from 'react-native-svg';
 import Donut, {DEFAULT_SIZE} from './Donut';
 import {Pressable, View} from 'react-native';
 
 const Part = ({index, total, size = DEFAULT_SIZE, data, state}) => {
-  const width = size / 2;
   const item = data[index];
   const percent = (item.value / total) * 100;
   let height = 0;
@@ -23,49 +23,30 @@ const Part = ({index, total, size = DEFAULT_SIZE, data, state}) => {
     });
   }
 
-  const style = {
-    // backgroundColor: item.color,
-    // opacity: 0.5,
-    width,
-    position: 'absolute',
-  };
-
-  const props = {
-    onPress: () => state[1](index),
-  };
-
   const components = [];
 
   const acc = top + height;
-  if (top >= size) {
-    components.push(
-      <Pressable
-        {...props}
-        style={[
-          style,
-          {
-            height: acc > size * 2 ? acc - size * 2 : height,
-            bottom: top - size,
-          },
-        ]}
-      />,
-    );
-  } else {
-    const part2Height = top < size && acc > size ? acc - size : 0;
-    if (acc > size) height = size - top;
+  if (acc > size) height = size - top;
 
-    components.push(
-      <>
-        <Pressable {...props} style={[style, {height, right: 0, top}]} />
-        {!!part2Height && (
-          <Pressable
-            {...props}
-            style={[style, {height: part2Height, bottom: 0}]}
-          />
-        )}
-      </>,
-    );
-  }
+  const degree1 = (cumulativePercent / 100) * 360;
+  const degree2 = ((cumulativePercent + percent) / 100) * 360;
+  const radian1 = ((degree1 - 90) * Math.PI) / 180;
+  const radian2 = ((degree2 - 90) * Math.PI) / 180;
+  const r = size / 2;
+  const center = size / 2;
+  const x1 = center + r * Math.cos(radian1);
+  const y1 = center + r * Math.sin(radian1);
+  const x2 = center + r * Math.cos(radian2);
+  const y2 = center + r * Math.sin(radian2);
+
+  components.push(
+    <Path
+      onPress={() => state[1](index)}
+      d={`M ${center} ${center} L ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2} Z`}
+      // fill={item.color}
+      fill="#00000000"
+    />,
+  );
 
   if (state[0] === index && item.legend) {
     const styl = {position: 'absolute'};
@@ -97,23 +78,20 @@ export default props => {
       onPress={() => state[1]()}>
       <Donut {...props} strokeWidth={strokeWidth} />
 
-      <View
-        style={{
-          position: 'absolute',
-          height: size,
-          width: size,
-        }}>
+      <Svg style={{position: 'absolute'}} height={size} width={size}>
         {data.map((d, i) => (
           <Part {...props} index={i} state={state} />
         ))}
-      </View>
+      </Svg>
+
       <View
         style={{
+          pointerEvents: 'none',
           width: size - strokeWidth * 2,
           height: size - strokeWidth * 2,
           borderRadius: size,
-          alignItems:'center',
-          justifyContent:'center',
+          alignItems: 'center',
+          justifyContent: 'center',
           // backgroundColor: 'red',
           // opacity: .9,
           position: 'absolute',
