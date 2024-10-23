@@ -17,9 +17,9 @@ import React from 'react';
 import DonutContainer from 'react-native-multi-layer-donut-chart';
 import {StyleSheet, Text, View} from 'react-native';
 
-const Legend = (title, subtitle, backgroundColor) => (
+const Legend = (subtitle, backgroundColor) => (
   <View style={styles.legend}>
-    <Text>{title}</Text>
+    <Text style={{fontWeight: 'bold'}}>{backgroundColor.toUpperCase()}</Text>
     <Text>{subtitle}</Text>
     <View
       style={{
@@ -36,42 +36,47 @@ const App = () => {
     <View style={{marginTop: 100}}>
       <DonutContainer
         total={1000}
-        size={150}
+        size={150} // default 200
         data={[
           {
-            value: 100,
+            value: 60,
             color: 'green',
-            legend: Legend('Desmond', '24GB used', 'green'),
+            legend: Legend('description', 'green'),
+          },
+          {
+            value: 60,
+            color: 'gray',
+            legend: Legend('description', 'gray'),
           },
           {
             value: 200,
             color: 'red',
-            legend: Legend('Desmond', '24GB used', 'red'),
+            legend: Legend('description', 'red'),
           },
           {
             value: 100,
             color: 'blue',
-            legend: Legend('Desmond', '24GB used', 'blue'),
+            legend: Legend('description', 'blue'),
           },
           {
             value: 300,
             color: 'orange',
-            legend: Legend('Desmond', '24GB used', 'orange'),
+            legend: Legend('description', 'orange'),
           },
           {
             value: 100,
             color: 'black',
-            legend: Legend('Desmond', '24GB used', 'black'),
+            legend: Legend('description', 'black'),
           },
           {
             value: 100,
             color: 'brown',
-            legend: Legend('Desmond', '24GB used', 'brown'),
+            legend: Legend('description', 'brown'),
           },
           {
             value: 100,
             color: 'turquoise',
-            legend: Legend('Desmond', '24GB used', 'turquoise'),
+            legend: Legend('description', 'turquoise'),
           },
         ]}>
         <Text style={{fontWeight: 'bold'}}>Title</Text>
