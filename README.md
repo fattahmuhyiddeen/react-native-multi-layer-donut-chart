@@ -1,6 +1,7 @@
 # react-native-multi-layer-donut-chart
 
-![ezgif-5-3af8326b17](https://github.com/user-attachments/assets/44e4d27a-c688-4e3f-b38b-5b52cd249898)
+![ezgif-7-6ac7fdb5de](https://github.com/user-attachments/assets/acb3d4c5-11b7-41ac-a151-8e4716b8ff6c)
+
 
 
 ## Installation
