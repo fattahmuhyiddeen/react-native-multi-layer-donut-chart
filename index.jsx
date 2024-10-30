@@ -3,14 +3,15 @@ import Svg, { Path } from "react-native-svg";
 import Donut, { DEFAULT_SIZE } from "./Donut";
 import { Pressable, View } from "react-native";
 
-const Part = ({ index, total, size = DEFAULT_SIZE, data, state }) => {
+const Part = ({ index, size = DEFAULT_SIZE, data, state, ...props }) => {
+  const realTotal = data.reduce((pv, d) => pv + d.value, 0);
+  const total = props.total ? Math.max(realTotal, props.total) : realTotal;
   const item = data[index];
   const percent = (item.value / total) * 100;
 
-  let cumulativePercent = 0;
-  data
+  const cumulativePercent = data
     .slice(0, index)
-    .forEach((d) => (cumulativePercent += (d.value / total) * 100));
+    .reduce((pv, d) => pv + (d.value / total) * 100, 0);
 
   const degree1 = (cumulativePercent / 100) * 360;
   const degree2 = ((cumulativePercent + percent) / 100) * 360;
@@ -27,13 +28,15 @@ const Part = ({ index, total, size = DEFAULT_SIZE, data, state }) => {
     <Path
       onPress={() => state[1](index)}
       d={`M ${center} ${center} L ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2} Z`}
-      // fill={item.color}
       fill="#00000000"
+      // fill={item.color}
     />
   );
 };
 
-const Legend = ({ total, size = DEFAULT_SIZE, data, state }) => {
+const Legend = ({ size = DEFAULT_SIZE, data, state, ...props }) => {
+  const realTotal = data.reduce((pv, d) => pv + d.value, 0);
+  const total = props.total ? Math.max(realTotal, props.total) : realTotal;
   const [layout, setLayout] = useState({ width: 0, height: 0 });
   const index = state[0];
   if (index != 0 && !index) return;

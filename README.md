@@ -35,7 +35,7 @@ const App = () => {
   return (
     <View style={{marginTop: 100}}>
       <DonutContainer
-        total={1000}
+        total={1000} // if this props not defined, it will take total sum of value in data. and also, if this prop is lesser than total sum in data, total sum in data will be used
         size={150} // default 200
         data={[
           {
