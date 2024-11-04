@@ -14,7 +14,7 @@ const Part = ({ index, size = DEFAULT_SIZE, data, state, ...props }) => {
     .reduce((pv, d) => pv + (+d.value / total) * 100, 0);
 
   const degree1 = (cumulativePercent / 100) * 360;
-  const degree2 = ((cumulativePercent + percent) / 100) * 360;
+  const degree2 = (Math.min(cumulativePercent + percent, 359.9) / 100) * 360;
   const radian1 = ((degree1 - 90) * Math.PI) / 180;
   const radian2 = ((degree2 - 90) * Math.PI) / 180;
   const r = size / 2;
