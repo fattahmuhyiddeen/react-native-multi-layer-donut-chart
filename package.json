@@ -1,6 +1,6 @@
 {
   "name": "react-native-multi-layer-donut-chart",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "main": "index.jsx",
   "scripts": {
@@ -22,8 +22,5 @@
   "bugs": {
     "url": "https://github.com/fattahmuhyiddeen/react-native-multi-layer-donut-chart/issues"
   },
-  "homepage": "https://github.com/fattahmuhyiddeen/react-native-multi-layer-donut-chart#readme",
-  "dependencies": {
-    "react-native-svg": "15.8.0"
-  }
+  "homepage": "https://github.com/fattahmuhyiddeen/react-native-multi-layer-donut-chart#readme"
 }
