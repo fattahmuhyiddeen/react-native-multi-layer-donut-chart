@@ -24,10 +24,12 @@ const Part = ({ index, size = DEFAULT_SIZE, data, state, ...props }) => {
   const x2 = center + r * Math.cos(radian2);
   const y2 = center + r * Math.sin(radian2);
 
+  const largeArcFlag = +(percent > 50);
+
   return (
     <Path
       onPress={() => state[1](index)}
-      d={`M ${center} ${center} L ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2} Z`}
+      d={`M ${center} ${center} L ${x1} ${y1} A ${r} ${r} 0 ${largeArcFlag} 1 ${x2} ${y2} Z`}
       fill="#00000000"
       // fill={item.color}
     />
