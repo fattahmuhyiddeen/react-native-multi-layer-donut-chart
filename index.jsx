@@ -4,14 +4,14 @@ import Donut, { DEFAULT_SIZE } from "./Donut";
 import { Pressable, View } from "react-native";
 
 const Part = ({ index, size = DEFAULT_SIZE, data, state, ...props }) => {
-  const realTotal = data.reduce((pv, d) => pv + d.value, 0);
-  const total = props.total ? Math.max(realTotal, props.total) : realTotal;
+  const realTotal = data.reduce((pv, d) => pv + +d.value, 0);
+  const total = props.total ? Math.max(realTotal, +props.total) : realTotal;
   const item = data[index];
-  const percent = (item.value / total) * 100;
+  const percent = (+item.value / total) * 100;
 
   const cumulativePercent = data
     .slice(0, index)
-    .reduce((pv, d) => pv + (d.value / total) * 100, 0);
+    .reduce((pv, d) => pv + (+d.value / total) * 100, 0);
 
   const degree1 = (cumulativePercent / 100) * 360;
   const degree2 = ((cumulativePercent + percent) / 100) * 360;
@@ -35,14 +35,14 @@ const Part = ({ index, size = DEFAULT_SIZE, data, state, ...props }) => {
 };
 
 const Legend = ({ size = DEFAULT_SIZE, data, state, ...props }) => {
-  const realTotal = data.reduce((pv, d) => pv + d.value, 0);
-  const total = props.total ? Math.max(realTotal, props.total) : realTotal;
+  const realTotal = data.reduce((pv, d) => pv + +d.value, 0);
+  const total = props.total ? Math.max(realTotal, +props.total) : realTotal;
   const [layout, setLayout] = useState({ width: 0, height: 0 });
   const index = state[0];
   if (index != 0 && !index) return;
   const item = data[index];
 
-  const percent = (item.value / total) * 100;
+  const percent = (+item.value / total) * 100;
   let height = 0;
 
   // TODO use parabolic function to get exact value
@@ -54,7 +54,7 @@ const Legend = ({ size = DEFAULT_SIZE, data, state, ...props }) => {
   let cumulativePercent = 0;
   if (index) {
     data.slice(0, index).forEach((d) => {
-      const pcent = (d.value / total) * 100;
+      const pcent = (+d.value / total) * 100;
       cumulativePercent += pcent;
       top += getHeight(pcent);
     });
