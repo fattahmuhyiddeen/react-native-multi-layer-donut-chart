@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Svg, { Path } from "react-native-svg";
 import Donut, { DEFAULT_SIZE } from "./Donut";
 import { Pressable, View } from "react-native";
@@ -41,6 +41,7 @@ const Legend = ({ size = DEFAULT_SIZE, data, state, ...props }) => {
   const index = state[0];
   if (index != 0 && !index) return;
   const item = data[index];
+  if (!item) return;
 
   const percent = (+item.value / total) * 100;
   let height = 0;
@@ -94,9 +95,12 @@ const Legend = ({ size = DEFAULT_SIZE, data, state, ...props }) => {
 };
 
 export default (props) => {
-  const { size = DEFAULT_SIZE, data, thickness, children } = props;
+  const { size = DEFAULT_SIZE, data, thickness, children, total } = props;
   const state = useState();
   const strokeWidth = thickness || size / 10;
+  useEffect(() => {
+    state[1]();
+  }, [total, data]);
   return (
     <Pressable
       style={{ alignItems: "center", justifyContent: "center" }}

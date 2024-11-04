@@ -6,8 +6,9 @@
 ## Installation
 
 ```
-npm i react-native-multi-layer-donut-chart
+npm i react-native-multi-layer-donut-chart react-native-svg
 ```
+* this repo requires react-native-svg
 
 
 ## Usage (Sample code)
