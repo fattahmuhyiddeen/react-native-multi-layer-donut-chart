@@ -98,25 +98,26 @@ const Legend = ({ size = DEFAULT_SIZE, data, state, ...props }) => {
 };
 
 export default (props) => {
-  const { size = DEFAULT_SIZE, data, thickness, children, total } = props;
+  const { size = DEFAULT_SIZE, thickness, children, total } = props;
+  const data = props.data.filter((d) => d.value && +d.value);
   const state = useState();
   const strokeWidth = thickness || size / 10;
   useEffect(() => {
     state[1]();
-  }, [total, data]);
+  }, [total, props.data]);
   return (
     <Pressable
       style={{ alignItems: "center", justifyContent: "center" }}
       onPress={() => state[1]()}
     >
-      <Donut {...props} strokeWidth={strokeWidth} />
+      <Donut {...props} strokeWidth={strokeWidth} data={data} />
 
       <Svg style={{ position: "absolute" }} height={size} width={size}>
         {data.map((_, i) => (
-          <Part {...props} index={i} state={state} />
+          <Part {...props} index={i} state={state} data={data} />
         ))}
       </Svg>
-      <Legend {...props} state={state} />
+      <Legend {...props} state={state} data={data} />
 
       <View
         style={{
