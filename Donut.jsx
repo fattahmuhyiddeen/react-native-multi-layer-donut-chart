@@ -12,7 +12,8 @@ export default ({
   let acc = 0;
   const realTotal = data.reduce((pv, d) => pv + +d.value, 0);
   const total = props.total ? Math.max(realTotal, +props.total) : realTotal;
-  const radius = (size / strokeWidth) * 6;
+  // const radius = (size / strokeWidth) * 6;
+  const radius = size / 2 - strokeWidth / 2;
   const length = 2 * Math.PI * radius;
 
   const totalPercent = data.reduce((pv, d) => pv + (+d.value / total) * 100, 0);
