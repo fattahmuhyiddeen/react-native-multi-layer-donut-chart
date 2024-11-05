@@ -45,7 +45,7 @@ const Legend = ({ size = DEFAULT_SIZE, data, state, ...props }) => {
   const item = data[index];
   if (!item) return;
 
-  const percent = (+item.value / total) * 100;
+  const percent = Math.min((+item.value / total) * 100, 99.9);
   let height = 0;
 
   // TODO use parabolic function to get exact value
@@ -83,7 +83,8 @@ const Legend = ({ size = DEFAULT_SIZE, data, state, ...props }) => {
 
       if (cumulativePercent + percent <= 75)
         style.bottom = Math.max(0, top - size);
-      else style.top = size * 2 - acc;
+      else style.top = layout.height;
+      // else style.top = size * 2 - acc;
     }
     return (
       <View
