@@ -1,12 +1,12 @@
-import React from 'react';
-import Svg, {Circle} from 'react-native-svg';
+import React from "react";
+import Svg, { Circle } from "react-native-svg";
 export const DEFAULT_SIZE = 200;
 
 export default ({
   data,
   size = DEFAULT_SIZE,
   strokeWidth,
-  baseColor = '#f1f1f1',
+  baseColor = "#f1f1f1",
   ...props
 }) => {
   let acc = 0;
@@ -23,9 +23,9 @@ export default ({
   const x = center + radius * Math.cos(radian);
   const y = center + radius * Math.sin(radian);
 
-  const getProps = stroke => ({
+  const getProps = (stroke) => ({
     r: radius,
-    fill: 'none',
+    fill: "none",
     stroke,
     strokeWidth,
     strokeDasharray: length,
@@ -37,7 +37,7 @@ export default ({
     <Svg height={size} width={size}>
       <Circle {...getProps(baseColor)} />
       {data
-        .map(({value, color}) => (
+        .map(({ value, color }) => (
           <Circle
             {...getProps(color)}
             strokeLinecap="round"
@@ -45,12 +45,14 @@ export default ({
           />
         ))
         .reverse()}
-      <Circle
-        x={x}
-        y={y}
-        fill={data[data.length - 1].color}
-        r={strokeWidth / 2}
-      />
+      {!!data.length && (
+        <Circle
+          x={x}
+          y={y}
+          fill={data[data.length - 1].color}
+          r={strokeWidth / 2}
+        />
+      )}
     </Svg>
   );
 };
