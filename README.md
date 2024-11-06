@@ -337,17 +337,15 @@ const App = () => {
               })
             }
             keyboardType="numeric"
-            value={v.value}
+            value={'' + v.value}
             style={styles.textInput}
           />
-          {arr.length > 1 && (
-            <TouchableOpacity
-              onPress={() => {
-                setValues(v => v.filter((_, i) => i !== index));
-              }}>
-              <Text style={{color: 'red'}}>Delete</Text>
-            </TouchableOpacity>
-          )}
+          <TouchableOpacity
+            onPress={() => {
+              setValues(v => v.filter((_, i) => i !== index));
+            }}>
+            <Text style={{color: 'red'}}>Delete</Text>
+          </TouchableOpacity>
         </View>
       ))}
     </View>
