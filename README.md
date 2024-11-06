@@ -9,13 +9,14 @@
 npm i react-native-multi-layer-donut-chart react-native-svg
 ```
 * this repo requires react-native-svg
+* this repo is typescript friendly
 
 
 ## Usage (Sample code)
 
 ```
 import React from 'react';
-import DonutContainer from 'react-native-multi-layer-donut-chart';
+import Donut from 'react-native-multi-layer-donut-chart';
 import {StyleSheet, Text, View} from 'react-native';
 
 const Legend = (subtitle, backgroundColor) => (
@@ -35,7 +36,7 @@ const Legend = (subtitle, backgroundColor) => (
 const App = () => {
   return (
     <View style={{marginTop: 100}}>
-      <DonutContainer
+      <Donut
         total={1000} // if this props not defined, it will take total sum of value in data. and also, if this prop is lesser than total sum in data, total sum in data will be used
         size={150} // default 200
         thickness={10} // default is 10% from value of size
@@ -83,7 +84,7 @@ const App = () => {
         ]}>
         <Text style={{fontWeight: 'bold'}}>Title</Text>
         <Text>Subtitle</Text>
-      </DonutContainer>
+      </Donut>
     </View>
   );
 };
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
 
 ```
 
-## Advance usage example
+## Advance implementation example
 
 ```
 import React, {useState} from 'react';
@@ -277,11 +278,11 @@ const Legend = (subtitle, backgroundColor) => (
 );
 const App = () => {
   const [total, setTotal] = useState('1000');
-  const [values, setValues] = useState([{color: 'green', value: '100'}]);
+  const [values, setValues] = useState([{color: 'green', value: 100}]);
   return (
     <View style={{marginTop: 100}}>
       <DonutContainer
-        total={total} // if this props not defined, it will take total sum of value in data. and also, if this prop is lesser than total sum in data, total sum in data will be used
+        total={+total} // if this props not defined, it will take total sum of value in data. and also, if this prop is lesser than total sum of values in data, total sum of values in data will be used
         size={150} // default 200
         thickness={10} // default is 10% from value of size
         data={values.map(v => ({
@@ -331,7 +332,7 @@ const App = () => {
             onChangeText={t =>
               setValues(oldV => {
                 const newV = [...oldV];
-                newV[index].value = t;
+                newV[index].value = +t;
                 return newV;
               })
             }

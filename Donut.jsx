@@ -45,7 +45,7 @@ export default ({
           />
         ))
         .reverse()}
-      {!!data.length && (
+      {data.length > 2 && (
         <Circle
           x={x}
           y={y}

@@ -1,8 +1,9 @@
 {
   "name": "react-native-multi-layer-donut-chart",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "",
   "main": "index.jsx",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "pub": "npm publish --access=public"
